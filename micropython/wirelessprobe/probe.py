@@ -1,13 +1,29 @@
 import radio
-from microbit import button_a, button_b, display, Image
+from microbit import display, Image, pin0, pin1, pin2, compass, accelerometer
 
-radio.on()
 
-display.show(Image.HAPPY)
+def direction():
+    compass.calibrate()
+    display.show(Image.ARROW_N)
 
-while True:
+    while True:
+        gesture = accelerometer.current_gesture()
+        if gesture == "shake":
+            break # Back to the menu mode
+        needle = ((15 - compass.heading()) // 30) % 12
+        radio.send("direction_")
 
-    if button_a.was_pressed():
-        radio.send("A-pressed")
-    if button_b.was_pressed():
-        radio.send("B-pressed")
+def menu_mode():
+
+    display.show(Image.HAPPY)
+
+    while True:
+        if pin0.is_touched():
+            direction()
+        if pin1.is_touched():
+            acceleration()
+        if pin2.is_touched():
+            telesketch()
+
+if __name__ == "__main__":
+    menu_mode()

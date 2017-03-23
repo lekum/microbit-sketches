@@ -1,12 +1,15 @@
 import radio
-from microbit import display
+from microbit import display, Image
 
 radio.on()
+
+def decode_direction(dirstring):
+    needle = int(distring.split("direction_")[1])
+    display.show(Image.ALL_CLOCKS[needle])
 
 while True:
 
     incoming = radio.receive()
-    if incoming == "A-pressed":
-        display.show("A")
-    if incoming == "B-pressed":
-        display.show("B")
+
+    if incoming.startsWith("direction_"):
+        decode_direction(incoming)
