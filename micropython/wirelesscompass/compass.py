@@ -1,7 +1,7 @@
 import radio
 from microbit import display, Image, compass, button_a, button_b, sleep
 
-def direction():
+def send_direction():
     """
     Send the direction which the probe is pointing to:
     direction_N, direction_NE, direction_E...
@@ -40,7 +40,7 @@ def menu_mode():
         radio.send("ready")
 
         if button_a.is_pressed():
-            direction()
+            send_direction()
 
 if __name__ == "__main__":
     radio.on()
