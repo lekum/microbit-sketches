@@ -13,21 +13,21 @@ def send_direction():
         if button_b.is_pressed():
             break # Back to the menu mode
         heading = compass.heading()
-        if (heading > 343) or (heading <= 22):
+        if (heading > 337) or (heading <= 22):
             needle = "N"
         elif 22 < heading <= 67:
             needle = "NE"
-        elif 68 < heading <= 113:
+        elif 67 < heading <= 112:
             needle = "E"
-        elif 114 < heading <= 159:
+        elif 112 < heading <= 157:
             needle = "SE"
-        elif 160 < heading <= 205:
+        elif 157 < heading <= 202:
             needle = "S"
-        elif 206 < heading <= 251:
+        elif 202 < heading <= 247:
             needle = "SW"
-        elif 252 < heading <= 297:
+        elif 257 < heading <= 292:
             needle = "W"
-        elif 298 < heading <= 343:
+        elif 292 < heading <= 337:
             needle = "W"
         radio.send("dir_{}".format(needle))
 
